@@ -1,1 +1,8 @@
 .idea
+/.vs/wechat-bot/v16
+/.vs
+/src/bot/Release
+/src/Release
+/src/.vs/bot/v16
+/src/x64/Debug
+/src/bot/x64/Debug
