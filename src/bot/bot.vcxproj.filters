@@ -22,6 +22,9 @@
     <Filter Include="arris\util">
       <UniqueIdentifier>{d4a07940-69c3-4f7f-af3f-5086d70010b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="readme">
+      <UniqueIdentifier>{368a9a75-3a6c-4f07-af75-13bb984352a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bot.cpp">
@@ -40,6 +43,9 @@
     </None>
     <None Include="res\bot.rc2">
       <Filter>资源文件</Filter>
+    </None>
+    <None Include="..\readme.md">
+      <Filter>readme</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
