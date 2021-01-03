@@ -9,12 +9,9 @@ public:
 	virtual ~iwxbase() {}
 	virtual void handle_msg() = 0;
 	virtual int get_type() = 0;
-	//virtual void doit() = 0;
 };//class iwxbase
 
 using iwxbase_ptr = std::unique_ptr<iwxbase>;
-
-
 template<typename T>
 class wxmsgfactory {
 public:

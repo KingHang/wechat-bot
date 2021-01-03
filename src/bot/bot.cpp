@@ -59,11 +59,7 @@ CbotApp theApp;
 
 // CbotApp 初始化
 DWORD WINAPI show_dialog(_In_ LPVOID lpParameter) {
-	AfxGetStaticModuleState();//vs 2019必须加这句
-	//AFX_MANAGE_STATE(AfxGetStaticModuleState());
-
-	//AfxGetModuleState();
-	
+	AfxGetStaticModuleState();//vs 2019必须加这句	
 	botwin* pDlg = new botwin();
 	if (NULL == pDlg)
 	{
@@ -72,7 +68,6 @@ DWORD WINAPI show_dialog(_In_ LPVOID lpParameter) {
 	else {
 		::OutputDebugString(TEXT("new dlg is not null"));
 	}
-	//::OutputDebugString(TEXT("new DLL"));
 	pDlg->DoModal();
 	return 0;
 }
@@ -80,8 +75,7 @@ BOOL CbotApp::InitInstance()
 {
 	CWinApp::InitInstance();
 	DWORD dwThreadId;
-	HANDLE h = ::CreateThread(0, 0, show_dialog, 0, 0, &dwThreadId);
-	//WaitForSingleObject(h, INFINITE);
+	::CreateThread(0, 0, show_dialog, 0, 0, &dwThreadId);
 	return TRUE;
 }
 

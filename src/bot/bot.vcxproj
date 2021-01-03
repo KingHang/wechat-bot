@@ -205,8 +205,10 @@
     <ClInclude Include="..\lib\arris\net\net.hpp" />
     <ClInclude Include="..\lib\arris\net\websocket.hpp" />
     <ClInclude Include="..\lib\arris\thread\wxthread.hpp" />
+    <ClInclude Include="..\lib\arris\util\constant.hpp" />
     <ClInclude Include="..\lib\arris\util\json_util.hpp" />
     <ClInclude Include="..\lib\arris\util\log_util.hpp" />
+    <ClInclude Include="..\lib\arris\util\read_mem.hpp" />
     <ClInclude Include="..\lib\arris\util\str_util.hpp" />
     <ClInclude Include="..\lib\arris\util\utf8.hpp" />
     <ClInclude Include="..\lib\arris\wechat\abnormalmsg.hpp" />

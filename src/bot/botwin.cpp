@@ -65,7 +65,7 @@ int botwin::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	DWORD dwThreadId;
-	HANDLE h = ::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &dwThreadId);
+	::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &dwThreadId);
 
 	return 0;
 }

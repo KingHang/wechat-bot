@@ -80,8 +80,6 @@ namespace net {
             server_->stop();
         }
     protected:
-        void wechat_msg() {
-        }
         void send_to_client(websocketpp::connection_hdl hdl, message_ptr msg) {
             if (kMsgQueue.size()>0) {
                 std::string queue_msg = kMsgQueue.front();

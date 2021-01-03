@@ -9,6 +9,11 @@ public:
 	~contact() {}
 	virtual void handle_msg() {
 	}
+	virtual int get_type() {
+		return type_;
+	}
+private:
+	int type_;
 };
 }//namespace wechat
 }//namespace arris

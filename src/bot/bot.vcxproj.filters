@@ -118,6 +118,12 @@
     <ClInclude Include="..\lib\arris\util\utf8.hpp">
       <Filter>arris\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\arris\util\read_mem.hpp">
+      <Filter>arris\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\util\constant.hpp">
+      <Filter>arris\util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="bot.rc">
