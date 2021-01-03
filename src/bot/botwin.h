@@ -11,6 +11,7 @@ class botwin : public CDialogEx
 public:
 	botwin(CWnd* pParent = nullptr);   // 标准构造函数
 	virtual ~botwin();
+	//void WebsocketServerThreadProc();
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME

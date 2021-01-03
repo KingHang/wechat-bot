@@ -23,7 +23,6 @@ namespace arris {
 			void init() {
 
 				p_dll_destroy_ =new dll_destroy();
-				__OutputDebugString(TEXT("init:%d\n"), p_dll_destroy_->get_type());
 				add(p_dll_destroy_->get_type(), p_dll_destroy_);
 
 			}

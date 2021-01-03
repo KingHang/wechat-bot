@@ -33,14 +33,7 @@ namespace net {
             tinyjson_ = std::make_unique<tinyjson>();
             msg_mgr_ = std::make_unique<msg_mgr>();
             
-            /*iwxbase_ptr
-            */
-            //contact* 
-            //msg_mgr_->add();
-
-
             this->port_ = kPort;
-            
         }
 
         void port(unsigned int port) {
@@ -51,17 +44,12 @@ namespace net {
         }
         void start() {
             try {
-                // Set logging settings
-                //server_->set_access_channels(websocketpp::log::alevel::all);
-                //server_->clear_access_channels(websocketpp::log::alevel::frame_payload);
-
                 // Initialize ASIO
                 server_->init_asio();
                 server_->set_reuse_addr(true);
 
                 // Register our message handler
                 server_->set_message_handler(std::bind(&wsserver::on_message, this, ::_1, ::_2));
-                //server_->set
                 server_->set_http_handler(std::bind(&wsserver::on_http, this, ::_1));
                 server_->set_fail_handler(std::bind(&wsserver::on_fail, this, ::_1));
                 server_->set_close_handler(std::bind(&wsserver::on_close, this, ::_1));
@@ -105,17 +93,12 @@ namespace net {
 
            bool js_json_type= tinyjson_->is_json(msg);
            if (js_json_type ==true) {
-               //msg_mgr_->doit();
-               //int type=0;
                int type = tinyjson_->get_type(msg);
                __OutputDebugString(TEXT("type is :%d\n"),type);
                msg_mgr_->run(type);
            }
            else {
-               
                std::string content = "its not json type!";
-               
-               //std::cout << content << std::endl;
                abnormal_msg_->handled_msg(content);
            }
            
@@ -124,24 +107,11 @@ namespace net {
             //sleep(6);
             return true;
         }
-        /*void on_sendto_client(websocketpp::connection_hdl hdl, message_ptr msg) {
-            if (kMsgQueue.size()>0) {
-                std::string queue_msg = kMsgQueue.front();
-                this->server_->send(hdl, queue_msg,msg->get_opcode());
-                kMsgQueue.pop();
-            }
-        }*/
-        void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
-            /*std::cout << "on_message called with hdl: " << hdl.lock().get()
-                << " and message: " << msg->get_payload()
-                << std::endl;*/
-                //__OutputDebugString(TEXT("on_message called with hdl:%d,and message:%s\n"),hdl.lock().get(),msg->get_payload());
 
-                //std::cout << "msg:" <<msg->get_payload() <<std::endl;
+        void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
             try {
                 handle_msg(msg->get_payload());
                 send_to_client(hdl,msg);
-                //this->server_->send(hdl, msg->get_payload(), msg->get_opcode());
             }
             catch (websocketpp::exception const& e) {
                 __OutputDebugString(TEXT("websocket send exception:%s\n"), e.what());

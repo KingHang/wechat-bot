@@ -24,9 +24,6 @@ public:
 		p.get();
 	}
 
-	//void receive_from_queue() {
-	//}
-
 };//class msgtoqueue
 
 }//namespace wechat

@@ -1,6 +1,6 @@
 ﻿// botwin.cpp: 实现文件
 //
-
+#pragma once
 #include "pch.h"
 #include "bot.h"
 #include "botwin.h"
@@ -8,6 +8,7 @@
 
 #include <arris/net/net.hpp>
 #include <arris/net/websocket.hpp>
+
 using namespace arris::net;
 
 // botwin 对话框
@@ -38,15 +39,6 @@ BEGIN_MESSAGE_MAP(botwin, CDialogEx)
 	ON_WM_NCPAINT()
 END_MESSAGE_MAP()
 
-/*
-void __stdcall destroy_all()
-{
-	CWnd* pWnd = AfxGetMainWnd();
-	HWND hHwnd = pWnd->m_hWnd;
-	::PostMessage(hHwnd, WM_CLOSE, NULL, NULL);
-}*/
-
-
 // botwin 消息处理程序
 void botwin::OnClose()
 {
@@ -57,14 +49,11 @@ void botwin::OnClose()
 	HINSTANCE hInstance = AfxGetInstanceHandle();
 	__OutputDebugString(TEXT("instance:%x\n"), hInstance);
 	FreeLibraryAndExitThread(hInstance, 0);
-	
-	
 	/*----------释放掉注入的dll-------------*/
 	CDialogEx::OnClose();
 }
 
 DWORD WINAPI WebsocketServerThreadProc(_In_ LPVOID lpParameter) {
-	
 	netcreate<inet, wsserver> server;
 	ptr = server.create();
 	ptr->start();
@@ -76,15 +65,7 @@ int botwin::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	DWORD dwThreadId;
-	::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &dwThreadId);
-	// TODO:  在此添加您专用的创建代码
-	/*  websocket & http  server
-	*/
-	
-	/*netcreate<inet, wsserver> server;
-	ptr = server.create();
-	ptr->start();*/
-	/*  websocket & http  server*/
+	HANDLE h = ::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &dwThreadId);
 
 	return 0;
 }
@@ -92,7 +73,6 @@ int botwin::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void botwin::OnNcPaint()
 {
-	/*
 	return;
 	static int i = 2;
 	if (i > 0)
@@ -104,7 +84,7 @@ void botwin::OnNcPaint()
 	else
 	{
 		CDialog::OnNcPaint();
-	}*/
+	}
 	// TODO: 在此处添加消息处理程序代码
 	// 不为绘图消息调用 CDialogEx::OnNcPaint()
 }

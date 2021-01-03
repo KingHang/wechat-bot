@@ -14,14 +14,6 @@ using namespace arris::wechat;
 namespace arris {
 namespace util {
 
-/*
-class structtojson {
-public:
-	json tojson() {
-		json j;
-	}
-};*/
-
 class tinyjson {
 public:
 	tinyjson() {}
@@ -53,39 +45,13 @@ public:
 		std::string dump_str = j.dump();
 		return dump_str;
 	}
-	/*
-	std::string st_to_str(const WxMsg& st) {
-		json j;
-		j["msgid"] = json_obj_["id"];
-		j["sender"] = st.sender;
-		j["receiver"] = st.receiver;
-		j["status"] = st.status;
-		j["content"] = st.content;
-		j["time"] = s_wxtime();
-		j["type"] = json_obj_["type"];
-		j["srvid"] = st.srvid;
-
-		std::string dumpstr;
-		try {
-			dumpstr = j.dump();
-		}
-		catch (json::exception& e) {
-			std::string err = "json dump error!";
-			dumpstr = ret_msg(json_obj_["id"], kMsgFailedStatus, err);
-		}
-
-		return dumpstr;
-	}*/
+	
 
 	json parser(const std::string& str) {
-		//std::string ansi_str = U8ToUnicode(str.c_str());
-		std::wstring ansi_str = utf8_to_wstring(str);
-		__OutputDebugString(TEXT("ansi_str :%s\n"),ansi_str.c_str());
+		std::wstring wstr = utf8_to_wstring(str);
 		json j;
 		try {
-
-			//__OutputDebugString(TEXT("parser:%s\n"),str.c_str());
-			j = nlohmann::json::parse(ansi_str);
+			j = nlohmann::json::parse(wstr);
 		}
 		catch (json::exception& e) {
 			__OutputDebugString(TEXT("error:%s\n"), e.what());

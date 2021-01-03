@@ -18,6 +18,7 @@ class CbotApp : public CWinApp
 {
 public:
 	CbotApp();
+	//void show_dialog();
 
 // 重写
 public:

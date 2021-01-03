@@ -1,9 +1,12 @@
 ﻿// bot.cpp: 定义 DLL 的初始化例程。
 //
-
+#pragma once
 #include "pch.h"
 #include "framework.h"
 #include "bot.h"
+
+
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -55,11 +58,12 @@ CbotApp theApp;
 
 
 // CbotApp 初始化
-DWORD WINAPI ThreadProc(_In_ LPVOID lpParameter) {
-	//AfxGetModuleState();
+DWORD WINAPI show_dialog(_In_ LPVOID lpParameter) {
 	AfxGetStaticModuleState();//vs 2019必须加这句
 	//AFX_MANAGE_STATE(AfxGetStaticModuleState());
 
+	//AfxGetModuleState();
+	
 	botwin* pDlg = new botwin();
 	if (NULL == pDlg)
 	{
@@ -76,7 +80,8 @@ BOOL CbotApp::InitInstance()
 {
 	CWinApp::InitInstance();
 	DWORD dwThreadId;
-	::CreateThread(0, 0, ThreadProc, 0, 0, &dwThreadId);
+	HANDLE h = ::CreateThread(0, 0, show_dialog, 0, 0, &dwThreadId);
+	//WaitForSingleObject(h, INFINITE);
 	return TRUE;
 }
 
