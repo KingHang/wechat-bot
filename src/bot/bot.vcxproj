@@ -83,7 +83,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)lib;$(SolutionDir)include;$(IncludePath)</IncludePath>
+    <IncludePath>D:\cplusplus\opensource\boost_1_74_0;$(SolutionDir)lib;$(SolutionDir)include;$(IncludePath)</IncludePath>
+    <LibraryPath>D:\cplusplus\opensource\boost_1_74_0\stage\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -200,11 +201,21 @@
     <None Include="res\bot.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\lib\arris\net\constant.hpp" />
     <ClInclude Include="..\lib\arris\net\net.hpp" />
     <ClInclude Include="..\lib\arris\net\websocket.hpp" />
+    <ClInclude Include="..\lib\arris\thread\wxthread.hpp" />
     <ClInclude Include="..\lib\arris\util\json_util.hpp" />
     <ClInclude Include="..\lib\arris\util\log_util.hpp" />
     <ClInclude Include="..\lib\arris\util\str_util.hpp" />
+    <ClInclude Include="..\lib\arris\util\utf8.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\abnormalmsg.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\constant.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\contact.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\destroy.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\wxbase.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\wxmgr.hpp" />
     <ClInclude Include="bot.h" />
     <ClInclude Include="botwin.h" />
     <ClInclude Include="framework.h" />

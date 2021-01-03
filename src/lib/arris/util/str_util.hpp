@@ -1,3 +1,4 @@
+#pragma once
 #include<string>
 #include <locale>
 #include <codecvt>
@@ -104,7 +105,7 @@ namespace util {
 		std::string format = year + month + day + hour + min + sec;
 		return format;
 	}
-	std::wstring __stdcall wxtime()
+	std::wstring __stdcall ws_wxtime()
 	{
 		struct tm t;
 		time_t now;  //声明time_t类型变量
@@ -172,6 +173,69 @@ namespace util {
 		return format;
 	}
 
+	std::string __stdcall s_wxtime()
+	{
+		struct tm t;
+		time_t now;  //声明time_t类型变量
+		time(&now);      //获取系统日期和时间
+		localtime_s(&t, &now);   //获取当地日期和时间
+
+		std::string year = inttostring(t.tm_year + 1900);
+		std::string month;
+		if ((t.tm_mon + 1) < 10)
+		{
+			month = "0" + inttostring(t.tm_mon + 1);
+		}
+		else
+		{
+			month = inttostring(t.tm_mon + 1);
+		}
+
+		std::string day;
+		if (t.tm_mday < 10)
+		{
+			day = "0" + inttostring(t.tm_mday);
+		}
+		else
+		{
+			day = inttostring(t.tm_mday);
+		}
+
+
+
+		std::string hour;
+		if (t.tm_hour < 10)
+		{
+			hour = "0" + inttostring(t.tm_hour);
+		}
+		else {
+			hour = inttostring(t.tm_hour);
+
+		}
+		std::string min;
+		if (t.tm_min < 10)
+		{
+			min = "0" + inttostring(t.tm_min);
+		}
+		else {
+			min = inttostring(t.tm_min);
+		}
+
+
+		std::string sec;
+		if (t.tm_sec < 10)
+		{
+			sec = "0" + inttostring(t.tm_sec);
+
+		}
+		else {
+			sec = inttostring(t.tm_sec);
+		}
+
+
+		std::string format = year + "-" + month + ("-") + day + (" ") + hour + (":") + min + (":") + sec;
+		return format;
+	}
     
 //}//namespace str
 }//namespace util

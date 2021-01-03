@@ -25,6 +25,12 @@
     <Filter Include="readme">
       <UniqueIdentifier>{368a9a75-3a6c-4f07-af75-13bb984352a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="arris\wechat">
+      <UniqueIdentifier>{837bdc7c-004a-4bda-acbd-c9f1ff68787c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="arris\thread">
+      <UniqueIdentifier>{a9c9e2a4-75f0-4826-a0a0-45c299633c46}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bot.cpp">
@@ -80,6 +86,36 @@
       <Filter>arris\util</Filter>
     </ClInclude>
     <ClInclude Include="..\lib\arris\util\str_util.hpp">
+      <Filter>arris\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\net\constant.hpp">
+      <Filter>arris\net</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\thread\wxthread.hpp">
+      <Filter>arris\thread</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\constant.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\wxbase.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\wxmgr.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\contact.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\abnormalmsg.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\destroy.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\util\utf8.hpp">
       <Filter>arris\util</Filter>
     </ClInclude>
   </ItemGroup>

@@ -24,4 +24,5 @@ protected:
 public:
 	afx_msg void OnClose();
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
+	afx_msg void OnNcPaint();
 };

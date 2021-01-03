@@ -8,10 +8,10 @@ public:
 	virtual void stop() = 0;
 	virtual ~inet() {}
 };
-
 using inet_ptr = std::unique_ptr<inet>;
 
-//template<typename T>
+
+template<typename T>
 class netfactory{
 public:
 	virtual inet_ptr create() = 0;
