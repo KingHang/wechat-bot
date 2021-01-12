@@ -120,11 +120,8 @@ namespace net {
             server::connection_ptr con = this->server_->get_con_from_hdl(hdl);
             __OutputDebugString(TEXT("websocket send exception:%s\n"), con->get_ec().message());
 
-            //std::cout << "Fail handler: " << con->get_ec() << " " << con->get_ec().message() << std::endl;
         }
         void on_close(websocketpp::connection_hdl) {
-            //__OutputDebugString(TEXT("Close handler"));
-            //std::cout << "Close handler" << std::endl;
             __OutputDebugString(TEXT("websocket close handler!\n"));
 
         }
@@ -134,7 +131,6 @@ namespace net {
             std::string res = con->get_request_body();
 
             std::stringstream ss;
-            //ss << "got HTTP request with " << res.size() << " bytes of body data.";
 
             con->set_body(ss.str());
             con->set_status(websocketpp::http::status_code::ok);

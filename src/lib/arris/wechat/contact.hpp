@@ -19,7 +19,7 @@ public:
 	virtual void handle_msg() {
 		DWORD node = contact_tree_->node();
 		contact_tree_->recurse(node);
-		std::string msg = contact_tree_->to_string("202222",type_);
+		std::string msg = contact_tree_->to_string("test id 202222",type_);
 		msgtoqueue_->send_to_queue(msg);
 	}
 	virtual int get_type() {
