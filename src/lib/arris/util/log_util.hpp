@@ -6,6 +6,9 @@ namespace arris {
 namespace util {
 //namespace log{
 	const size_t kTxtMsgBufferLen = 1024;
+	DWORD get_wx_baseaddr() {
+		return (DWORD)::GetModuleHandle(TEXT("WeChatWin.dll"));
+	}
 	int __stdcall __OutputDebugString(LPCTSTR pstrFormat, ...)
 	{
 		TCHAR szBuffer[kTxtMsgBufferLen] = { 0 };

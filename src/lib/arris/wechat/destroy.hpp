@@ -11,7 +11,7 @@ namespace wechat {
 class dll_destroy:public iwxbase {
 public:
 	dll_destroy() {
-		type_ = MsgType::kDestroyDllWin;
+		type_ = static_cast<int>(MsgType::kDestroyDllWin);
 	}
 	~dll_destroy() {}
 	void desroy_win() {

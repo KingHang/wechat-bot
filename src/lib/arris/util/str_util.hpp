@@ -6,7 +6,7 @@
 namespace arris {
 namespace util {
 //namespace str{
-    std::wstring __stdcall string_to_wstring(const std::string& s)
+    /*std::wstring __stdcall string_to_wstring(const std::string& s)
     {
         using default_convert = std::codecvt<wchar_t, char, std::mbstate_t>;
         static std::wstring_convert<default_convert>conv(new default_convert("CHS"));
@@ -27,7 +27,17 @@ namespace util {
     {
         static std::wstring_convert<std::codecvt_utf8<wchar_t> > conv;
         return wstring_to_string(conv.from_bytes(s));
-    }
+    }*/
+	std::wstring __stdcall string_to_wstring(const std::string& input)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.from_bytes(input);
+	}
+	std::string __stdcall wstring_to_string(const std::wstring& input)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
+		return converter.to_bytes(input);
+	}
 	std::wstring __stdcall inttowstring(int para)
 	{
 		std::wstringstream ss;

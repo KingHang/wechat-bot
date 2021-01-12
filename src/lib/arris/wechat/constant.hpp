@@ -14,10 +14,11 @@ namespace wechat {
 	const std::string kServerSide = "SERVER";
 	const std::string kClientSide = "CLIENT";
 
-	enum MsgType {
+	enum class MsgType {
 		kDestroyDllWin=9999,
 		kListChatRoomMemberNick = 5020,
 		kListChatRoomMember = 5010,
+		kUserListFromContact=5000,
 		kSendPicMsg = 500,
 		kServerSideMsg = 1,
 		kClientSideMsg = 0,

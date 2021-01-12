@@ -214,8 +214,10 @@
     <ClInclude Include="..\lib\arris\wechat\abnormalmsg.hpp" />
     <ClInclude Include="..\lib\arris\wechat\constant.hpp" />
     <ClInclude Include="..\lib\arris\wechat\contact.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\contact_tree.hpp" />
     <ClInclude Include="..\lib\arris\wechat\destroy.hpp" />
     <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\offset_version.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxbase.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxmgr.hpp" />
     <ClInclude Include="bot.h" />

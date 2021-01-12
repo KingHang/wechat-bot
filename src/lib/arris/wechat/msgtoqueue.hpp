@@ -16,15 +16,17 @@ public:
 	msgtoqueue() {}
 	~msgtoqueue() {}
 
-	void push(const std::string& msg) {
-		kMsgQueue.push(msg);
-	}
 	void send_to_queue(const std::string& msg) {
 		auto p = thread_pool.enqueue(std::bind(&msgtoqueue::push, this, msg));
 		p.get();
 	}
+private:
+	void push(const std::string& msg) {
+		kMsgQueue.push(msg);
+	}
 
 };//class msgtoqueue
 
+using msgtoqueue_ptr = std::unique_ptr<msgtoqueue>;
 }//namespace wechat
 }//namespace arris

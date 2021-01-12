@@ -124,6 +124,12 @@
     <ClInclude Include="..\lib\arris\util\constant.hpp">
       <Filter>arris\util</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\contact_tree.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\offset_version.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="bot.rc">

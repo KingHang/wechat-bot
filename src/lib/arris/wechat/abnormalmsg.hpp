@@ -20,7 +20,7 @@ namespace arris {
 			abnormal_msg() {}
 			~abnormal_msg() {}
 			void handled_msg(const std::string &content) {
-				std::string msg = json_->ret_msg(time2id(), kMsgFailedStatus, content, MsgType::kAbnormalMsg);
+				std::string msg = json_->ret_msg(time2id(), kMsgFailedStatus, content, static_cast<int>(MsgType::kAbnormalMsg));
 				msgtoqueue_->send_to_queue(msg);
 			};
 

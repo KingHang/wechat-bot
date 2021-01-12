@@ -9,8 +9,23 @@ using namespace arris::util;
 
 namespace arris{
 namespace util {
+	std::string __stdcall read_char(HANDLE process, DWORD lpBaseAddress, int size) {
+		int memlen = size * sizeof(char);
+		std::unique_ptr<char[]> tempbuf = std::make_unique<char[]>(memlen + 1);
+		if (process == NULL) {
+			process = ::GetCurrentProcess();
+		}
+		DWORD len;
 
-	DWORD WINAPI read_dword(HANDLE process,DWORD address)
+		if (ReadProcessMemory(process, (LPVOID)lpBaseAddress, tempbuf.get(), memlen + 1, &len) == 0)
+		{
+			return "";
+		}
+		std::string ss;
+		ss.assign(tempbuf.get());
+		return ss;
+	}
+	DWORD __stdcall read_dword(HANDLE process,DWORD address)
 	{
 		DWORD node = 0;
 		LPDWORD readByte = NULL;
@@ -25,23 +40,22 @@ namespace util {
 		return node;
 	}
 
-	std::wstring read_wstr(HANDLE process,DWORD address, int size)
+	std::wstring __stdcall read_wchar(HANDLE process,DWORD address, int size)
 	{
-		std::unique_ptr<BYTE[]> tempbuf = std::make_unique<BYTE[]>(size * 2);
-		DWORD len = 0;
+		int memlen = size * sizeof(wchar_t);
+		std::unique_ptr<wchar_t[]> tempbuf = std::make_unique<wchar_t[]>(memlen + 1);
 		if (process == NULL) {
 			process = ::GetCurrentProcess();
 		}
-		if (ReadProcessMemory(process, (LPVOID)address, tempbuf.get(), size * 2, &len) == 0)
+		DWORD len;
+
+		if (ReadProcessMemory(process, (LPVOID)address, tempbuf.get(), memlen + 1, &len) == 0)
 		{
 			return TEXT("");
 		}
-
-		std::unique_ptr<wchar_t[]> p = std::make_unique<wchar_t[]>(size + 1);
-		wmemcpy_s(p.get(), size, (wchar_t*)tempbuf.get(), size);
-		std::wstring result = { 0 };
-		result.assign(p.get());
-		return result;
+		std::wstring ss;
+		ss.assign(tempbuf.get());
+		return ss;
 	}
 
 	BYTE WINAPI read_byte(HANDLE process,DWORD address)

@@ -48,7 +48,7 @@ public:
 	
 
 	json parser(const std::string& str) {
-		std::wstring wstr = utf8_to_wstring(str);
+		std::wstring wstr = string_to_wstring(str);
 		json j;
 		try {
 			j = nlohmann::json::parse(wstr);
