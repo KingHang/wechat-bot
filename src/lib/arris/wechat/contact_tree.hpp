@@ -21,6 +21,7 @@ namespace arris {
 		public:
 			contact_tree() :header_node_(0){
 				header_node_ = header_node();
+				contact_json_["type"] = MsgType::kUserListFromContact;
 			}
 
 			DWORD node() {
@@ -52,9 +53,11 @@ namespace arris {
 				node_list_.push_back(node);
 				
 				std::wstring id = get_wxid(node);
+				std::wstring nick = get_nick(node);
 				json j;
 				j["wxid"]= wstring_to_string(id);
-				contact_json_.push_back(j);
+				j["name"] = ucs2_to_utf8(wstring_to_wchar(nick));
+				contact_json_["content"].push_back(j);
 
 				DWORD node1 = read_dword(NULL, node);
 				DWORD node2 = read_dword(NULL, node + 0x04);
@@ -92,6 +95,12 @@ namespace arris {
 					std::wstring wxid = read_wchar(NULL,addr,size);
 					return wxid;
 				}
+			}
+			std::wstring get_nick(DWORD node) {
+				int size = read_dword(NULL, node + static_cast<DWORD>(version::contact_data_offset::wxnick_len));
+				DWORD addr = read_dword(NULL, node + static_cast<DWORD>(version::contact_data_offset::wxnick_offset));
+				std::wstring nick = read_wchar(NULL, addr, size);
+				return nick;
 			}
 		private:
 			DWORD header_node_;

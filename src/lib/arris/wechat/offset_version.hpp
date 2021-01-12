@@ -14,7 +14,8 @@ namespace arris {
 				wxid2_offset = 0x30,
 				wxid2_len    = 0x34,
 				wxcode_offset = 0x44,
-				wxnick_offset = 0x8c
+				wxnick_offset = 0x8c,
+				wxnick_len = 0x90
 			};
 		};
 	}

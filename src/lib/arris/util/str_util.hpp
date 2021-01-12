@@ -28,6 +28,30 @@ namespace util {
         static std::wstring_convert<std::codecvt_utf8<wchar_t> > conv;
         return wstring_to_string(conv.from_bytes(s));
     }*/
+	wchar_t* wstring_to_wchar(const std::wstring& ws)
+	{
+		return const_cast<wchar_t*>(ws.c_str());
+	}
+	std::string ucs2_to_utf8(wchar_t* pucs2)
+	{
+		//预转换，得到所需空间的大小，这次用的函数和上面名字相反
+		int len = ::WideCharToMultiByte(CP_UTF8, NULL, pucs2, wcslen(pucs2), NULL, 0, NULL, NULL);
+		//同上，分配空间要给'\0'留个空间
+		//UTF8虽然是Unicode的压缩形式，但也是多字节字符串，所以可以以char的形式保存
+		char* p_utf8 = new char[len + 1];
+		//转换
+		//unicode版对应的strlen是wcslen
+		::WideCharToMultiByte(CP_UTF8, NULL, pucs2, wcslen(pucs2), p_utf8, len, NULL, NULL);
+		//最后加上'\0'
+		p_utf8[len] = '\0';
+		std::string buf(p_utf8);
+		if (NULL != p_utf8)
+		{
+			p_utf8 = NULL;
+			delete[] p_utf8;
+		}
+		return buf;
+	}
 	std::wstring __stdcall string_to_wstring(const std::string& input)
 	{
 		std::wstring_convert<std::codecvt_utf8<wchar_t>> converter;
