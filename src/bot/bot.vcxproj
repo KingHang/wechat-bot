@@ -206,6 +206,7 @@
     <ClInclude Include="..\lib\arris\net\websocket.hpp" />
     <ClInclude Include="..\lib\arris\thread\wxthread.hpp" />
     <ClInclude Include="..\lib\arris\util\constant.hpp" />
+    <ClInclude Include="..\lib\arris\util\hook.hpp" />
     <ClInclude Include="..\lib\arris\util\json_util.hpp" />
     <ClInclude Include="..\lib\arris\util\log_util.hpp" />
     <ClInclude Include="..\lib\arris\util\read_mem.hpp" />
@@ -216,8 +217,12 @@
     <ClInclude Include="..\lib\arris\wechat\contact.hpp" />
     <ClInclude Include="..\lib\arris\wechat\contact_tree.hpp" />
     <ClInclude Include="..\lib\arris\wechat\destroy.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\hook.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\hookmsg_mgr.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\mgr.hpp" />
     <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp" />
     <ClInclude Include="..\lib\arris\wechat\offset_version.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\txtmsg_hook.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxbase.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxmgr.hpp" />
     <ClInclude Include="bot.h" />

@@ -5,7 +5,7 @@
 #include <arris/util/utf8.hpp>
 
 #include <arris/wechat/constant.hpp>
-using namespace arris::net;
+//using namespace arris::net;
 using nlohmann::json;
 using namespace arris::util;
 using namespace arris::wechat;
@@ -19,6 +19,7 @@ public:
 	tinyjson() {}
 
 	bool is_json(const std::string& str) {
+		__OutputDebugString(TEXT("is json string:%s\n"),str.c_str());
 		bool is_json_type = true;
 		try {
 			json_obj_ = nlohmann::json::parse(str);

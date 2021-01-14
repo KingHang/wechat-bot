@@ -17,7 +17,9 @@ namespace arris {
 
 		class abnormal_msg {
 		public:
-			abnormal_msg() {}
+			abnormal_msg() {
+				msgtoqueue_ = std::make_unique<msgtoqueue>();
+			}
 			~abnormal_msg() {}
 			void handled_msg(const std::string &content) {
 				std::string msg = json_->ret_msg(time2id(), kMsgFailedStatus, content, static_cast<int>(MsgType::kAbnormalMsg));

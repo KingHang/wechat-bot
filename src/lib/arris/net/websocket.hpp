@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include <websocketpp/config/asio_no_tls.hpp>
 #include <websocketpp/server.hpp>
 
@@ -18,6 +19,7 @@ using websocketpp::lib::placeholders::_2;
 using namespace arris::net;
 using namespace arris::util;
 using namespace arris::wechat;
+using namespace arris::thread;
 
 
 namespace arris {
@@ -34,6 +36,7 @@ namespace net {
             msg_mgr_ = std::make_unique<msg_mgr>();
             
             this->port_ = kPort;
+            loop();//start loop
         }
 
         void port(unsigned int port) {
@@ -49,6 +52,8 @@ namespace net {
                 server_->set_reuse_addr(true);
 
                 // Register our message handler
+                //server_->set_socket_init_handler(std::bind(&wsserver::init_send_msg_loop,this));
+                server_->set_open_handler(std::bind(&wsserver::on_open,this,::_1));
                 server_->set_message_handler(std::bind(&wsserver::on_message, this, ::_1, ::_2));
                 server_->set_http_handler(std::bind(&wsserver::on_http, this, ::_1));
                 server_->set_fail_handler(std::bind(&wsserver::on_fail, this, ::_1));
@@ -62,6 +67,7 @@ namespace net {
                 // Start the server accept loop
                 server_->start_accept();
 
+                //loop();
                 // Start the ASIO io_service run loop
                 server_->run();
 
@@ -79,14 +85,36 @@ namespace net {
         void stop() {
             server_->stop();
         }
+
     protected:
-        void send_to_client(websocketpp::connection_hdl hdl, message_ptr msg) {
+        void loop()
+        {
+            auto p = thread_pool.enqueue(std::bind(&wsserver::send_msg_to_client, this));
+        }
+        void send_msg_to_client() {
+            __OutputDebugString(TEXT("send msg to client begin!"));
+            while (1) {
+                //__OutputDebugString(TEXT("queue size:%d\n"), kMsgQueue.size());
+                //__OutputDebugString(TEXT("hdl_ size:%d\n"), hdl_.size());
+                if (kMsgQueue.size() > 0) {
+                    std::string queue_msg = kMsgQueue.front();
+                    for (size_t i = 0; i < hdl_.size();i++) {
+                        websocketpp::connection_hdl hdl = hdl_[i];
+                        this->server_->send(hdl, queue_msg, websocketpp::frame::opcode::text);
+                    }
+                    kMsgQueue.pop();
+                }
+                
+            }
+        }
+        /*void send_to_client(websocketpp::connection_hdl hdl, message_ptr msg) {
+            __OutputDebugString(TEXT("queue size:%d\n"), kMsgQueue.size());
             if (kMsgQueue.size()>0) {
                 std::string queue_msg = kMsgQueue.front();
                 this->server_->send(hdl,queue_msg, msg->get_opcode());
                 kMsgQueue.pop();
             }
-        }
+        }*/
         void handle_msg(const std::string& msg) {
 
            bool js_json_type= tinyjson_->is_json(msg);
@@ -107,9 +135,10 @@ namespace net {
         }
 
         void on_message(websocketpp::connection_hdl hdl, message_ptr msg) {
+            //__OutputDebugString(TEXT("hello world"));
             try {
                 handle_msg(msg->get_payload());
-                send_to_client(hdl,msg);
+                //send_to_client(hdl,msg);
             }
             catch (websocketpp::exception const& e) {
                 __OutputDebugString(TEXT("websocket send exception:%s\n"), e.what());
@@ -135,7 +164,12 @@ namespace net {
             con->set_body(ss.str());
             con->set_status(websocketpp::http::status_code::ok);
         }
+        void on_open(websocketpp::connection_hdl hdl) {
+            //__OutputDebugString(TEXT("hdl_"));
+            hdl_.push_back(hdl);
+        }
     private:
+        std::vector<websocketpp::connection_hdl> hdl_;
         std::unique_ptr<server> server_;
         std::unique_ptr<msg_mgr> msg_mgr_;
         std::unique_ptr<abnormal_msg> abnormal_msg_;

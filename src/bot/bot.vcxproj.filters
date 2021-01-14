@@ -31,6 +31,9 @@
     <Filter Include="arris\thread">
       <UniqueIdentifier>{a9c9e2a4-75f0-4826-a0a0-45c299633c46}</UniqueIdentifier>
     </Filter>
+    <Filter Include="arris\hook">
+      <UniqueIdentifier>{e3da2e32-3c31-40c0-b169-74fbd2eb3570}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bot.cpp">
@@ -129,6 +132,21 @@
     </ClInclude>
     <ClInclude Include="..\lib\arris\wechat\offset_version.hpp">
       <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\util\hook.hpp">
+      <Filter>arris\util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\hook.hpp">
+      <Filter>arris\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\hookmsg_mgr.hpp">
+      <Filter>arris\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\txtmsg_hook.hpp">
+      <Filter>arris\hook</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\mgr.hpp">
+      <Filter>arris\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

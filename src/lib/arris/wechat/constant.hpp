@@ -22,7 +22,8 @@ namespace wechat {
 		kSendPicMsg = 500,
 		kServerSideMsg = 1,
 		kClientSideMsg = 0,
-		kAbnormalMsg = 4
+		kAbnormalMsg = 4,
+		kHookTxtMsgType=0x1
 	};
 
 	/*enum MsgType {

@@ -2,32 +2,10 @@
 #include<string>
 #include <locale>
 #include <codecvt>
-
+#include <sstream>
 namespace arris {
 namespace util {
-//namespace str{
-    /*std::wstring __stdcall string_to_wstring(const std::string& s)
-    {
-        using default_convert = std::codecvt<wchar_t, char, std::mbstate_t>;
-        static std::wstring_convert<default_convert>conv(new default_convert("CHS"));
-        return conv.from_bytes(s);
-    }
-    std::string __stdcall wstring_to_string(const std::wstring& s)
-    {
-        using default_convert = std::codecvt<wchar_t, char, std::mbstate_t>;
-        static std::wstring_convert<default_convert>conv(new default_convert("CHS"));
-        return conv.to_bytes(s);
-    }
-    std::string __stdcall ansi_to_utf8(const std::string& s)
-    {
-        static std::wstring_convert<std::codecvt_utf8<wchar_t> > conv;
-        return conv.to_bytes(string_to_wstring(s));
-    }
-    std::string __stdcall utf8_to_ansi(const std::string& s)
-    {
-        static std::wstring_convert<std::codecvt_utf8<wchar_t> > conv;
-        return wstring_to_string(conv.from_bytes(s));
-    }*/
+
 	wchar_t* wstring_to_wchar(const std::wstring& ws)
 	{
 		return const_cast<wchar_t*>(ws.c_str());

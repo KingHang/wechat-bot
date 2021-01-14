@@ -17,6 +17,19 @@ namespace arris {
 				wxnick_offset = 0x8c,
 				wxnick_len = 0x90
 			};
+
+			enum class hook_common_offset {
+				hook_point_offset = 0x3C9C32,
+				call_offset = 0x85A30
+			};
+			enum class hook_msg_type {
+				hook_msg_type_offset = 0x30
+			};
+			enum class hook_txtmsg_offset {
+				wxid_offset = 0x40,
+				msg_content_offset = 0x68,
+				group_msg_sender_offset = 0x144
+			};
 		};
 	}
 }

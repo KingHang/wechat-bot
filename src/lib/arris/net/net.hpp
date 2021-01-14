@@ -6,6 +6,7 @@ class inet {
 public:
 	virtual void start() = 0;
 	virtual void stop() = 0;
+	//virtual void loop() = 0;
 	virtual ~inet() {}
 };
 using inet_ptr = std::unique_ptr<inet>;
