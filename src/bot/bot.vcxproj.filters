@@ -56,6 +56,9 @@
     <None Include="..\readme.md">
       <Filter>readme</Filter>
     </None>
+    <None Include="..\..\README.md">
+      <Filter>readme</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">

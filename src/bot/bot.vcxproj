@@ -196,6 +196,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\README.md" />
     <None Include="..\readme.md" />
     <None Include="bot.def" />
     <None Include="res\bot.rc2" />
