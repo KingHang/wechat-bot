@@ -19,8 +19,8 @@ public:
 		mgr_ptr_ = std::make_unique<mgr<iwxbase>>();
 		init();
 	}
-	void run(int type) {
-		mgr_ptr_->run(type);
+	void run(const int type, const wx_msg& st_msg) {
+		mgr_ptr_->run(type,st_msg);
 	}
 private:
 	void init() {

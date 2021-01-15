@@ -19,6 +19,7 @@ namespace wechat {
 		kListChatRoomMemberNick = 5020,
 		kListChatRoomMember = 5010,
 		kUserListFromContact=5000,
+		kSendTxtMsg = 555,
 		kSendPicMsg = 500,
 		kServerSideMsg = 1,
 		kClientSideMsg = 0,

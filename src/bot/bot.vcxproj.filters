@@ -151,6 +151,9 @@
     <ClInclude Include="..\lib\arris\wechat\mgr.hpp">
       <Filter>arris\hook</Filter>
     </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\sendtxtmsg.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="bot.rc">

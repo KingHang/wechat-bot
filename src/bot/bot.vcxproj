@@ -223,6 +223,7 @@
     <ClInclude Include="..\lib\arris\wechat\mgr.hpp" />
     <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp" />
     <ClInclude Include="..\lib\arris\wechat\offset_version.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\sendtxtmsg.hpp" />
     <ClInclude Include="..\lib\arris\wechat\txtmsg_hook.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxbase.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxmgr.hpp" />

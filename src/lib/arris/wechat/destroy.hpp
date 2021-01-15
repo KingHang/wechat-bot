@@ -27,12 +27,15 @@ public:
 			::PostMessage(h_wnd, WM_CLOSE, NULL, NULL);
 		}
 	}
-	virtual void handle_msg() {
+	virtual void handle_msg(const wx_msg& v_st_msg) {
 		desroy_win();
 	}
 	virtual int get_type() {
 		return type_;
 	}
+	virtual void set_data(const wx_msg& msg) {
+	};
+
 private:
 	int type_;
 };// class dll_destroy

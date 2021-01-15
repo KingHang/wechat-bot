@@ -5,7 +5,28 @@
 #include <sstream>
 namespace arris {
 namespace util {
-
+	std::wstring utf8_to_ucs2(char* p_utf8)
+	{
+		//预转换，得到所需空间的大小
+		int wcsLen = ::MultiByteToWideChar(CP_UTF8, NULL, p_utf8, strlen(p_utf8), NULL, 0);
+		//分配空间要给'\0'留个空间，MultiByteToWideChar不会给'\0'空间
+		wchar_t* p_ucs2 = new wchar_t[wcsLen + 1];
+		//转换
+		::MultiByteToWideChar(CP_UTF8, NULL, p_utf8, strlen(p_utf8), p_ucs2, wcsLen);
+		//最后加上'\0'
+		p_ucs2[wcsLen] = '\0';
+		std::wstring buf(p_ucs2);
+		if (NULL != p_ucs2)
+		{
+			p_ucs2 = NULL;
+			delete[] p_ucs2;
+		}
+		return buf;
+	}
+	char* string_to_char(const std::string& ws)
+	{
+		return const_cast<char*>(ws.c_str());
+	}
 	wchar_t* wstring_to_wchar(const std::wstring& ws)
 	{
 		return const_cast<wchar_t*>(ws.c_str());

@@ -18,15 +18,18 @@ namespace wechat {
 				}
 			}
 		}
-		void run(int type) {
+		void run(const int type,const wx_msg& st_msg) {
 			if (exist(type) == false) {
 				return;
 			}
-			obj_map_[type]->handle_msg();
+			obj_map_[type]->handle_msg(st_msg);
 		}
 		void add(int type, T* p) {
 			obj_map_.insert(std::make_pair(type, p));
 		}
+		//void set_data(const wx_msg& st_msg) {
+		//	st_msg_ = st_msg;
+		//}
 	private:
 		bool exist(int type) {
 			bool is_exist = true;
@@ -40,6 +43,7 @@ namespace wechat {
 		
 	private:
 		std::unordered_map<int, T*> obj_map_;
+		//wx_msg st_msg_;
 	};//class mgr
 
 	//using mgr_ptr = std::unique_ptr<mgr<T>>();

@@ -25,11 +25,12 @@ namespace arris {
 			virtual int get_type() {
 				return type_;
 			};
-			virtual void handle_msg() {
+			virtual void handle_msg(const wx_msg& v_st_msg) {
 				std::string msg = to_string();
 				__OutputDebugString(TEXT("msg:%s\n"),msg.c_str());
 				msgtoqueue_->send_to_queue(msg);
 			};
+			virtual void set_data(const wx_msg& msg) {}
 
 		private:
 			std::string to_string() {

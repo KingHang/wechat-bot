@@ -12,6 +12,9 @@
 
 #include <arris/wechat/wxmgr.hpp>
 #include <arris/wechat/abnormalmsg.hpp>
+#include <nlohmann/json.hpp>
+using nlohmann::json;
+
 
 
 using websocketpp::lib::placeholders::_1;
@@ -89,7 +92,7 @@ namespace net {
     protected:
         void loop()
         {
-            auto p = thread_pool.enqueue(std::bind(&wsserver::send_msg_to_client, this));
+            thread_pool.enqueue(std::bind(&wsserver::send_msg_to_client, this));
         }
         void send_msg_to_client() {
             __OutputDebugString(TEXT("send msg to client begin!"));
@@ -120,8 +123,10 @@ namespace net {
            bool js_json_type= tinyjson_->is_json(msg);
            if (js_json_type ==true) {
                int type = tinyjson_->get_type(msg);
+               wx_msg st_msg = tinyjson_->get_st(msg);
                __OutputDebugString(TEXT("type is :%d\n"),type);
-               msg_mgr_->run(type);
+               //msg_mgr_->
+               msg_mgr_->run(type,st_msg);
            }
            else {
                std::string content = "its not json type!";

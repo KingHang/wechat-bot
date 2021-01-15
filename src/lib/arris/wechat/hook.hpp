@@ -17,7 +17,8 @@ namespace wechat{
 		std::unique_ptr<hookmsg_mgr_ex> ptr=std::make_unique<hookmsg_mgr_ex>(r_eax);;
 		DWORD type = read_dword(NULL,r_eax+static_cast<DWORD>(version::hook_msg_type::hook_msg_type_offset));
 		__OutputDebugString(TEXT("hook msg type:%d"),type);
-		ptr->run(type);
+		wx_msg st_msg;//not used
+		ptr->run(type,st_msg);
 	}
 	__declspec(naked) void receive_wx_msg()
 	{		__asm

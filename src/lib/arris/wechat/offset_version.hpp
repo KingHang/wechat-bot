@@ -30,6 +30,11 @@ namespace arris {
 				msg_content_offset = 0x68,
 				group_msg_sender_offset = 0x144
 			};
+
+			enum class send_txtmsg_offset {
+				send_call_addr = 0x3A0C20,
+
+			};
 		};
 	}
 }

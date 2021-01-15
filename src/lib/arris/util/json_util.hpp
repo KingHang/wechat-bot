@@ -3,7 +3,7 @@
 #include <arris/util/log_util.hpp>
 #include <arris/util/str_util.hpp>
 #include <arris/util/utf8.hpp>
-
+#include <arris/wechat/wxbase.hpp>
 #include <arris/wechat/constant.hpp>
 //using namespace arris::net;
 using nlohmann::json;
@@ -49,10 +49,10 @@ public:
 	
 
 	json parser(const std::string& str) {
-		std::wstring wstr = string_to_wstring(str);
+		//std::wstring wstr = string_to_wstring(str);
 		json j;
 		try {
-			j = nlohmann::json::parse(wstr);
+			j = nlohmann::json::parse(str);
 		}
 		catch (json::exception& e) {
 			__OutputDebugString(TEXT("error:%s\n"), e.what());
@@ -64,6 +64,19 @@ public:
 		json j = parser(str);
 		return j["type"];
 	}
+
+	wx_msg get_st(const std::string &str) {
+		wx_msg st;
+		json j = parser(str);
+		st.id = j["id"];
+		std::string s_wxid = j["wxid"];
+		std::string s_content = j["content"];
+
+		st.wxid = utf8_to_ucs2(string_to_char(s_wxid));
+		st.content = utf8_to_ucs2(string_to_char(s_content));
+
+		return st;
+	}
 protected:
 	json opr() {
 	}
@@ -72,6 +85,7 @@ private:
 	json json_obj_;
 };// class tinyjson
 
+using tinyjson_ptr = std::unique_ptr<tinyjson>;
 
 }//namespace util
 }//namespace arris
