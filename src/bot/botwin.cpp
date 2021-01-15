@@ -83,7 +83,7 @@ int botwin::OnCreate(LPCREATESTRUCT lpCreateStruct)
 
 void botwin::OnNcPaint()
 {
-	return;//注释掉return,可隐藏窗口
+	//return;//注释掉return,可隐藏窗口
 	static int i = 2;
 	if (i > 0)
 	{
