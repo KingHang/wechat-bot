@@ -14,7 +14,7 @@ namespace wechat{
 	
 	void __stdcall dispatch_hook_msg(DWORD r_eax) {
 		__OutputDebugString(TEXT("eax:%x\n"),r_eax);
-		std::unique_ptr<hookmsg_mgr> ptr=std::make_unique<hookmsg_mgr>(r_eax);;
+		std::unique_ptr<hookmsg_mgr_ex> ptr=std::make_unique<hookmsg_mgr_ex>(r_eax);;
 		DWORD type = read_dword(NULL,r_eax+static_cast<DWORD>(version::hook_msg_type::hook_msg_type_offset));
 		__OutputDebugString(TEXT("hook msg type:%d"),type);
 		ptr->run(type);

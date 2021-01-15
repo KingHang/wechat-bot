@@ -150,9 +150,15 @@ namespace net {
             __OutputDebugString(TEXT("websocket send exception:%s\n"), con->get_ec().message());
 
         }
-        void on_close(websocketpp::connection_hdl) {
+        void on_close(websocketpp::connection_hdl hdl) {
+            
+            //free hdl
+            hdl_.erase(std::remove_if(std::begin(hdl_), std::end(hdl_),
+                [&](const websocketpp::connection_hdl& a) {
+                if (a.lock() == hdl.lock()) return true;
+                return false;
+            }));
             __OutputDebugString(TEXT("websocket close handler!\n"));
-
         }
         void on_http(websocketpp::connection_hdl hdl) {
             server::connection_ptr con = this->server_->get_con_from_hdl(hdl);
