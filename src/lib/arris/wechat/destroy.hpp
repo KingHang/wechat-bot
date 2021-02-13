@@ -23,7 +23,7 @@ public:
 			msg.handled_msg(content);
 		}
 		else {
-			__OutputDebugString(TEXT("handle is :%x\n"),h_wnd);
+			//__OutputDebugString(TEXT("handle is :%x\n"),h_wnd);
 			::PostMessage(h_wnd, WM_CLOSE, NULL, NULL);
 		}
 	}

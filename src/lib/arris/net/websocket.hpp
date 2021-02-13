@@ -36,7 +36,9 @@ namespace net {
             server_ = std::make_unique<server>();
             abnormal_msg_ = std::make_unique<abnormal_msg>();
             tinyjson_ = std::make_unique<tinyjson>();
+            msgtoqueue_ = std::make_unique<msgtoqueue>();
             msg_mgr_ = std::make_unique<msg_mgr>();
+
             
             this->port_ = kPort;
             loop();//start loop
@@ -48,7 +50,7 @@ namespace net {
         ~wsserver() {
             stop();
         }
-        void start() {
+        virtual void start() override{
             try {
                 // Initialize ASIO
                 server_->init_asio();
@@ -63,42 +65,72 @@ namespace net {
                 server_->set_close_handler(std::bind(&wsserver::on_close, this, ::_1));
 
                 server_->set_validate_handler(std::bind(&wsserver::validate, this));
+                //server_->set_timer(1000, std::bind(&wsserver::send_msg_to_client, this));
 
                 // Listen on port 
                 server_->listen(this->port_);
 
                 // Start the server accept loop
                 server_->start_accept();
-
+                set_timer();
                 //loop();
                 // Start the ASIO io_service run loop
+                //server_->set_timer(1000,std::bind(&wsserver::send_msg_to_client,this));
                 server_->run();
 
             }
             catch (websocketpp::exception const& e) {
-                __OutputDebugString(TEXT("websocketpp exception:%s\n"),e.what());
+                //__OutputDebugString(TEXT("websocketpp exception:%s\n"),e.what());
             }
             catch (const std::exception& e) {
-                __OutputDebugString(TEXT("std exception:%s\n"), e.what());
+                //__OutputDebugString(TEXT("std exception:%s\n"), e.what());
             }
             catch (...) {
-                __OutputDebugString(TEXT("other exception!please review code!\n"));
+                //__OutputDebugString(TEXT("other exception!please review code!\n"));
             }
         }
-        void stop() {
+        virtual void stop() override {
             server_->stop();
         }
 
     protected:
+        void set_timer() {
+            server_->set_timer(15000,std::bind(&wsserver::on_timer,this));
+        }
         void loop()
         {
-            thread_pool.enqueue(std::bind(&wsserver::send_msg_to_client, this));
+            //return;
+            thread_pool.enqueue(std::bind(&wsserver::send_msg_to_client_old, this));
+        }
+        void on_timer() {
+            /*if (kMsgQueue.size() > 0) {
+                std::string queue_msg = kMsgQueue.front();
+                for (size_t i = 0; i < hdl_.size(); i++) {
+                    websocketpp::connection_hdl hdl = hdl_[i];
+                    this->server_->send(hdl, queue_msg, websocketpp::frame::opcode::text);
+                }
+                kMsgQueue.pop();
+            }*/
+            std::string heartbeat = tinyjson_->ret_msg(time2id(), kMsgOkStatus,"heart beat",static_cast<int>(MsgType::kHeartBeat));
+            msgtoqueue_->send_to_queue(heartbeat);
+            set_timer();
         }
         void send_msg_to_client() {
-            __OutputDebugString(TEXT("send msg to client begin!"));
+            if (kMsgQueue.size() > 0) {
+                std::string queue_msg = kMsgQueue.front();
+                for (size_t i = 0; i < hdl_.size(); i++) {
+                    websocketpp::connection_hdl hdl = hdl_[i];
+                    this->server_->send(hdl, queue_msg, websocketpp::frame::opcode::text);
+                }
+                kMsgQueue.pop();
+            }
+        }
+        void send_msg_to_client_old() {
+            //__OutputDebugString(TEXT("send msg to client begin!"));
             while (1) {
                 //__OutputDebugString(TEXT("queue size:%d\n"), kMsgQueue.size());
                 //__OutputDebugString(TEXT("hdl_ size:%d\n"), hdl_.size());
+                
                 if (kMsgQueue.size() > 0) {
                     std::string queue_msg = kMsgQueue.front();
                     for (size_t i = 0; i < hdl_.size();i++) {
@@ -107,6 +139,8 @@ namespace net {
                     }
                     kMsgQueue.pop();
                 }
+                Sleep(1);//
+                continue;//sleep(1)+continue,½â¾öcpu 100%
                 
             }
         }
@@ -124,7 +158,7 @@ namespace net {
            if (js_json_type ==true) {
                int type = tinyjson_->get_type(msg);
                wx_msg st_msg = tinyjson_->get_st(msg);
-               __OutputDebugString(TEXT("type is :%d\n"),type);
+               //__OutputDebugString(TEXT("type is :%d\n"),type);
                //msg_mgr_->
                msg_mgr_->run(type,st_msg);
            }
@@ -146,13 +180,13 @@ namespace net {
                 //send_to_client(hdl,msg);
             }
             catch (websocketpp::exception const& e) {
-                __OutputDebugString(TEXT("websocket send exception:%s\n"), e.what());
+                //__OutputDebugString(TEXT("websocket send exception:%s\n"), e.what());
             }
         }
         void on_fail(websocketpp::connection_hdl hdl) 
         {
             server::connection_ptr con = this->server_->get_con_from_hdl(hdl);
-            __OutputDebugString(TEXT("websocket send exception:%s\n"), con->get_ec().message());
+            //__OutputDebugString(TEXT("websocket send exception:%s\n"), con->get_ec().message());
 
         }
         void on_close(websocketpp::connection_hdl hdl) {
@@ -163,7 +197,7 @@ namespace net {
                 if (a.lock() == hdl.lock()) return true;
                 return false;
             }));
-            __OutputDebugString(TEXT("websocket close handler!\n"));
+            //__OutputDebugString(TEXT("websocket close handler!\n"));
         }
         void on_http(websocketpp::connection_hdl hdl) {
             server::connection_ptr con = this->server_->get_con_from_hdl(hdl);
@@ -174,6 +208,7 @@ namespace net {
 
             con->set_body(ss.str());
             con->set_status(websocketpp::http::status_code::ok);
+            
         }
         void on_open(websocketpp::connection_hdl hdl) {
             //__OutputDebugString(TEXT("hdl_"));
@@ -185,6 +220,7 @@ namespace net {
         std::unique_ptr<msg_mgr> msg_mgr_;
         std::unique_ptr<abnormal_msg> abnormal_msg_;
         std::unique_ptr<tinyjson> tinyjson_;
+        std::unique_ptr<msgtoqueue> msgtoqueue_;
         unsigned int port_;
 
 

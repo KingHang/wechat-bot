@@ -6,6 +6,10 @@
 #include <arris/wechat/destroy.hpp>
 #include <arris/wechat/sendtxtmsg.hpp>
 #include <arris/wechat/mgr.hpp>
+#include <arris/wechat/personal_info.hpp>
+#include <arris/wechat/chatroom.hpp>
+#include <arris/wechat/sendpic.hpp>
+#include <arris/wechat/room_nick.hpp>
 using namespace arris::wechat;
 namespace arris {
 	namespace wechat {
@@ -29,6 +33,18 @@ namespace arris {
 				p_sendtxtmsg_ = new send_txt_msg();
 				mgr_ptr_->add(p_sendtxtmsg_->get_type(), p_sendtxtmsg_);
 
+				p_personal_info_ = new personal_info();
+				mgr_ptr_->add(p_personal_info_->get_type(), p_personal_info_);
+
+				p_chatroom_ = new chatroom();
+				mgr_ptr_->add(p_chatroom_->get_type(), p_chatroom_);
+
+				p_sendpic_ = new send_pic();
+				mgr_ptr_->add(p_sendpic_->get_type(), p_sendpic_);
+
+				p_room_nick_ = new room_nick();
+				mgr_ptr_->add(p_room_nick_->get_type(), p_room_nick_);
+
 				//add others here
 
 				//add others here
@@ -39,6 +55,10 @@ namespace arris {
 			iwxbase* p_dll_destroy_;
 			iwxbase* p_contact_;
 			iwxbase* p_sendtxtmsg_;
+			iwxbase* p_personal_info_;
+			iwxbase* p_chatroom_;
+			iwxbase* p_sendpic_;
+			iwxbase* p_room_nick_;
 
 		};
 

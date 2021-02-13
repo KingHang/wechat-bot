@@ -18,6 +18,7 @@ public:
 	~contact() {}
 	virtual void handle_msg(const wx_msg& v_st_msg) {
 		DWORD node = contact_tree_->node();
+		contact_tree_->list_clear();
 		contact_tree_->recurse(node);
 		std::string msg = contact_tree_->to_string("test id 202222",type_);
 		msgtoqueue_->send_to_queue(msg);
@@ -25,7 +26,7 @@ public:
 	virtual int get_type() {
 		return type_;
 	}
-	virtual void set_data(const wx_msg& msg) {};
+	//virtual void set_data(const wx_msg& msg) {};
 
 private:
 	int type_;

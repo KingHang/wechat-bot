@@ -3,8 +3,19 @@
 #include <locale>
 #include <codecvt>
 #include <sstream>
+#include <regex>
 namespace arris {
 namespace util {
+	std::vector<std::string> ws_split(const std::string& in, const std::string& delim)
+	{
+		std::regex re{ delim };
+		std::string::const_iterator a = in.begin();
+		std::string::const_iterator b = in.end();
+		return std::vector<std::string> {
+			std::sregex_token_iterator(in.begin(), in.end(), re, -1),
+				std::sregex_token_iterator()
+		};
+	}
 	std::wstring utf8_to_ucs2(char* p_utf8)
 	{
 		//预转换，得到所需空间的大小

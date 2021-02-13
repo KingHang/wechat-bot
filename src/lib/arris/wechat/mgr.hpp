@@ -13,8 +13,13 @@ namespace wechat {
 			typename std::unordered_map<int, T*>::iterator  iter = obj_map_.begin();
 			for (; iter != obj_map_.end(); iter++) {
 				if ((*iter).second != nullptr) {//first key,second value
-					delete (*iter).second;//free pointer
-					(*iter).second = nullptr;
+					try {
+						delete (*iter).second;//free pointer
+						(*iter).second = nullptr;
+					}
+					catch (...) {
+						__OutputDebugString(TEXT("mgr error:free pointer\n"));
+					}
 				}
 			}
 		}
@@ -22,7 +27,12 @@ namespace wechat {
 			if (exist(type) == false) {
 				return;
 			}
-			obj_map_[type]->handle_msg(st_msg);
+			try{
+				obj_map_[type]->handle_msg(st_msg);
+			}
+			catch (...) {
+				__OutputDebugString(TEXT("type no error:%d\n"),type);
+			}
 		}
 		void add(int type, T* p) {
 			obj_map_.insert(std::make_pair(type, p));

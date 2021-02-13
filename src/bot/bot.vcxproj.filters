@@ -56,9 +56,6 @@
     <None Include="..\readme.md">
       <Filter>readme</Filter>
     </None>
-    <None Include="..\..\README.md">
-      <Filter>readme</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -153,6 +150,24 @@
     </ClInclude>
     <ClInclude Include="..\lib\arris\wechat\sendtxtmsg.hpp">
       <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\personal_info.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\chatroom_tree.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\chatroom.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\sendpic.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\room_nick.hpp">
+      <Filter>arris\wechat</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\arris\wechat\newfriend_request.hpp">
+      <Filter>arris\hook</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

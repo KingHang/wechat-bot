@@ -16,15 +16,18 @@ namespace wechat {
 
 	enum class MsgType {
 		kDestroyDllWin=9999,
+		kPersonalInfo=6500,
 		kListChatRoomMemberNick = 5020,
 		kListChatRoomMember = 5010,
+		kHeartBeat=5005,
 		kUserListFromContact=5000,
 		kSendTxtMsg = 555,
 		kSendPicMsg = 500,
 		kServerSideMsg = 1,
 		kClientSideMsg = 0,
 		kAbnormalMsg = 4,
-		kHookTxtMsgType=0x1
+		kHookTxtMsgType=0x1,
+		kHookNewFriendRequest=0x25
 	};
 
 	/*enum MsgType {

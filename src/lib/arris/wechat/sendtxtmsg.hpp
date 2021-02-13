@@ -21,10 +21,10 @@ public:
 		tinyjson_ptr_ = std::make_unique<tinyjson>();
 		type_ = static_cast<int>(MsgType::kSendTxtMsg);
 	}
-	virtual int get_type() {
+	virtual int get_type() override{
 		return type_;
 	}
-	virtual void handle_msg(const wx_msg& v_st_msg) {
+	virtual void handle_msg(const wx_msg& v_st_msg) override {
 		std::string msg= send_to(v_st_msg);
 		msgtoqueue_->send_to_queue(msg);
 	}
@@ -76,8 +76,8 @@ private:
 		}
 		catch (...)
 		{
-			__OutputDebugString(TEXT("send txt msg:asm execution error!\n"));
-			__OutputDebugString(TEXT("line:%d,file:%s,func:%s\n"), __LINE__, TEXT(__FILE__), TEXT(__FUNCTION__));
+			//__OutputDebugString(TEXT("send txt msg:asm execution error!\n"));
+			//__OutputDebugString(TEXT("line:%d,file:%s,func:%s\n"), __LINE__, TEXT(__FILE__), TEXT(__FUNCTION__));
 			return tinyjson_ptr_->ret_msg(v_st_msg.id, kMsgFailedStatus,"send txt msg:asm execution error", static_cast<int>(MsgType::kSendTxtMsg));
 		}
 

@@ -75,7 +75,7 @@ namespace util {
 	}
 	std::wstring getwstr_from_addr(DWORD node, DWORD size_offset, DWORD str_offset) {
 		int size = read_dword(NULL, node + size_offset);
-		__OutputDebugString(TEXT("txt size:%d\n"),size);
+		//__OutputDebugString(TEXT("txt size:%d\n"),size);
 		DWORD addr = read_dword(NULL, node + str_offset);
 		std::wstring nick = read_wchar(NULL, addr, size);
 		return nick;

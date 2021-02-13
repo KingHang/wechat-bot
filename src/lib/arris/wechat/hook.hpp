@@ -13,15 +13,16 @@ namespace wechat{
 	DWORD ret_receive_msg_addr = get_wx_baseaddr() + static_cast<DWORD>(version::hook_common_offset::hook_point_offset) + 5;
 	
 	void __stdcall dispatch_hook_msg(DWORD r_eax) {
-		__OutputDebugString(TEXT("eax:%x\n"),r_eax);
-		std::unique_ptr<hookmsg_mgr_ex> ptr=std::make_unique<hookmsg_mgr_ex>(r_eax);;
+		//__OutputDebugString(TEXT("eax:%x\n"),r_eax);
+		std::unique_ptr<hookmsg_mgr_ex> ptr=std::make_unique<hookmsg_mgr_ex>(r_eax);
 		DWORD type = read_dword(NULL,r_eax+static_cast<DWORD>(version::hook_msg_type::hook_msg_type_offset));
-		__OutputDebugString(TEXT("hook msg type:%d"),type);
+		//__OutputDebugString(TEXT("hook msg type:%d"),type);
 		wx_msg st_msg;//not used
 		ptr->run(type,st_msg);
 	}
 	__declspec(naked) void receive_wx_msg()
-	{		__asm
+	{	
+		__asm
 		{
 			pushad;
 			pushfd;
@@ -38,7 +39,7 @@ namespace wechat{
 	void __stdcall hook() {
 		DWORD hook_offset = get_wx_baseaddr() + static_cast<DWORD>(version::hook_common_offset::hook_point_offset);
 		//ptr = 
-		__OutputDebugString(TEXT("hook offset:%x\n"),hook_offset);
+		//__OutputDebugString(TEXT("hook offset:%x\n"),hook_offset);
 		hook_five_bytes(hook_offset,(DWORD)receive_wx_msg);
 	}
 }//namespace hook

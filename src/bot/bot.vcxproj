@@ -79,7 +79,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>D:\github\wechat-bot\src\lib;D:\github\wechat-bot\src\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)lib;$(SolutionDir)include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -196,7 +196,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\README.md" />
     <None Include="..\readme.md" />
     <None Include="bot.def" />
     <None Include="res\bot.rc2" />
@@ -214,6 +213,8 @@
     <ClInclude Include="..\lib\arris\util\str_util.hpp" />
     <ClInclude Include="..\lib\arris\util\utf8.hpp" />
     <ClInclude Include="..\lib\arris\wechat\abnormalmsg.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\chatroom.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\chatroom_tree.hpp" />
     <ClInclude Include="..\lib\arris\wechat\constant.hpp" />
     <ClInclude Include="..\lib\arris\wechat\contact.hpp" />
     <ClInclude Include="..\lib\arris\wechat\contact_tree.hpp" />
@@ -222,7 +223,11 @@
     <ClInclude Include="..\lib\arris\wechat\hookmsg_mgr.hpp" />
     <ClInclude Include="..\lib\arris\wechat\mgr.hpp" />
     <ClInclude Include="..\lib\arris\wechat\msgtoqueue.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\newfriend_request.hpp" />
     <ClInclude Include="..\lib\arris\wechat\offset_version.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\personal_info.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\room_nick.hpp" />
+    <ClInclude Include="..\lib\arris\wechat\sendpic.hpp" />
     <ClInclude Include="..\lib\arris\wechat\sendtxtmsg.hpp" />
     <ClInclude Include="..\lib\arris\wechat\txtmsg_hook.hpp" />
     <ClInclude Include="..\lib\arris\wechat\wxbase.hpp" />

@@ -50,7 +50,7 @@ void botwin::OnClose()
 	ptr->stop();
 	/*----------释放掉注入的dll-------------*/
 	HINSTANCE hInstance = AfxGetInstanceHandle();
-	__OutputDebugString(TEXT("instance:%x\n"), hInstance);
+	//__OutputDebugString(TEXT("instance:%x\n"), hInstance);
 	FreeLibraryAndExitThread(hInstance, 0);
 	/*----------释放掉注入的dll-------------*/
 	CDialogEx::OnClose();
@@ -75,8 +75,10 @@ int botwin::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 
 	DWORD serverid, hookid;
-	::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &serverid);
-	::CreateThread(0, 0, HookThreadProc, 0, 0, &hookid);
+	HANDLE srv_handle=::CreateThread(0, 0, WebsocketServerThreadProc, 0, 0, &serverid);
+	//WaitForSingleObject(srv_handle, INFINITE);
+	HANDLE hook_handle = ::CreateThread(0, 0, HookThreadProc, 0, 0, &hookid);
+	//WaitForSingleObject(hook_handle, INFINITE);
 	return 0;
 }
 

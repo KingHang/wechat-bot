@@ -41,8 +41,22 @@ namespace arris {
 				return result;
 			}
 
+			void list_clear() {
+				
+				//     #5
+			
+				if (node_list_.size() > 0) {
+					node_list_.clear();
+				}
 
+				//    #6
+				if (contact_json_["content"].size() > 0) {
+					contact_json_["content"].clear();
+				}
+
+			}
 			void recurse(DWORD node) {
+				//node_list_.clear();
 				if (node == header_node_) {
 					return;
 				}

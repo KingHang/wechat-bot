@@ -19,20 +19,20 @@ public:
 	tinyjson() {}
 
 	bool is_json(const std::string& str) {
-		__OutputDebugString(TEXT("is json string:%s\n"),str.c_str());
+		//__OutputDebugString(TEXT("is json string:%s\n"),str.c_str());
 		bool is_json_type = true;
 		try {
 			json_obj_ = nlohmann::json::parse(str);
 		}
 		catch (json::exception& e) {
 			std::wstring str = string_to_wstring(e.what());
-			__OutputDebugString(TEXT("error:%s\n"), str.c_str());
+			//__OutputDebugString(TEXT("error:%s\n"), str.c_str());
 			is_json_type = false;
 		}
 		return is_json_type;
 	}
 
-	std::string ret_msg(const std::string& id,const std::string &status,const std::string content,int type) {
+	std::string ret_msg(const std::string& id,const std::string& status,const std::string& content,int type) {
 		json j;
 		j["id"] = id;
 		j["sender"] = kServerSide;
@@ -55,7 +55,7 @@ public:
 			j = nlohmann::json::parse(str);
 		}
 		catch (json::exception& e) {
-			__OutputDebugString(TEXT("error:%s\n"), e.what());
+			//__OutputDebugString(TEXT("error:%s\n"), e.what());
 		}
 		return j;
 	}
@@ -76,6 +76,17 @@ public:
 		st.content = utf8_to_ucs2(string_to_char(s_content));
 
 		return st;
+	}
+	std::string dump(const json& j,const int type) {
+		std::string result;
+		try {
+			result = j.dump();
+		}
+		catch (json::exception& e) {
+			//__OutputDebugString(TEXT("error:%s\n"), e.what());
+			result = ret_msg(time2id(), kMsgFailedStatus,e.what(),type);
+		}
+		return result;
 	}
 protected:
 	json opr() {
