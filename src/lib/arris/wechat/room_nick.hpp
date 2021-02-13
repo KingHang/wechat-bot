@@ -83,7 +83,7 @@ private:
 
 
 		tempStruc* p_edi = new tempStruc();
-		p_edi->pstr = new wchar_t();
+		//p_edi->pstr = new wchar_t();
 		DWORD r_ebx = 0;
 		__asm
 		{
@@ -126,10 +126,10 @@ private:
 		DWORD addr = read_dword(NULL, r_ebx);//addr
 		std::wstring nick = read_wchar(NULL, addr, len);
 
-		if (nullptr != p_edi->pstr) {
+		/*if (nullptr != p_edi->pstr) {
 			delete p_edi->pstr;
 			p_edi->pstr = nullptr;
-		}
+		}*/
 		if (nullptr != p_edi) {
 			delete p_edi;
 			p_edi = nullptr;
