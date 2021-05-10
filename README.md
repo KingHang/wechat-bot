@@ -1,4 +1,4 @@
-# 源码
+# 源码（本分支已经删除，请去下图获取）
 <p align="center">
   <img src="https://i.loli.net/2021/04/02/7QScLE6VOd195nP.jpg" width="180">
 </p>
