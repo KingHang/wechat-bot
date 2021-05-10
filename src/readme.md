@@ -6,19 +6,7 @@
 * 获取个人微信信息;
 * 获取微信群id和群成员id;
 * 获取群成员昵称，用如下代码，带wxid和roomid,单个获取
-```
-function get_chat_nick_p(wx_id,roomid)
-{
-  const j={
-    id:getid(),
-    type:CHATROOM_MEMBER_NICK,
-    content:roomid,//chatroom id 23023281066@chatroom  17339716569@chatroom
-    wxid:wx_id
-  };
-  const s= JSON.stringify(j);
-  return s;
-}
-```
+
 # 环境搭建
 * 1、安装boost
 * 2、vs2019 库目录设置：x:\xxxx\boost_1_74_0\stage\lib
